@@ -36,6 +36,77 @@ PS C:\> "Wel", "Please" -join "come "
 Welcome Please
 PS C:\>
 ```
+## 条件分岐
+### if ・ elseif ・ else
+```
+PS C:\> $a = 3
+PS C:\> if ($a -gt 0) {"TRUE"} else {"FALSE"}
+
+◆プロセスの数による条件分岐
+PS C:\> if  (((Get-Process).Count) -gt 20) {"Too Many"} else {"OK"}
+```
+### Switch
+```
+PS C:\> switch (3) { 1 {"One"} 2 {"Two"} default {"default"}}
+default
+
+PS C:\> switch -wildcard ('abcab') {a* {"A"} *b* {"B"} c* {"C"}}
+A
+B
+
+◆ログの絞り込み
+PS C:\> switch -Regex -File .\access.log { '/images/'{$_}}
+
+burger.letters.com - - [01/Jul/1995:00:00:12 -0400] "GET /images/NASA-logosmall.gif HTTP/1.0" 304 0
+unicomp6.unicomp.net - - [01/Jul/1995:00:00:14 -0400] "GET /images/NASA-logosmall.gif HTTP/1.0" 200 786
+unicomp6.unicomp.net - - [01/Jul/1995:00:00:14 -0400] "GET /images/KSC-logosmall.gif HTTP/1.0" 200 1204
+d104.aa.net - - [01/Jul/1995:00:00:15 -0400] "GET /images/NASA-logosmall.gif HTTP/1.0" 200 786
+d104.aa.net - - [01/Jul/1995:00:00:15 -0400] "GET /images/KSC-logosmall.gif HTTP/1.0" 200 1204
+```
+## 繰り返し処理
+- while() {}
+- do {} while()
+- do {} until()
+- for(;;){}
+- foreach ( in ){}
+- ForEach-Object
+- Where-Object
+
+```
+◆while文
+PS C:\> $count = 3
+PS C:\> while ($count -gt 0){
+>> "Iteration $count"
+>> $count--
+>> }
+Iteration 3
+Iteration 2
+Iteration 1
+
+◆foreach文
+PS C:\> foreach ($line in $proc){
+>> $line.name
+>> }
+AcroRd32
+AcroRd32
+AdobeCollabSync
+AdobeCollabSync
+
+◆Foreach-Object
+PS C:\> Get-ChildItem | ForEach-Object {$_.Name}
+cygwin
+...
+
+◆Where-Object
+PS C:\> Get-ChildItem C:\WORKSPACE\ | Where-Object {$_.Name -match ".txt"}
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----       2019/01/27     14:18         158482 process.txt
+-a----       2019/01/27     15:00              0 test.txt
+```
+
+
 ## 型・配列
 
 ```
