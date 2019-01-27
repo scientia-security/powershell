@@ -231,8 +231,24 @@ PS C:\Users> paramadd 2 3
 function test ($num1, $num2){ $num1 * $num2 }
 test 2 4
 test -num2 4 -num1 6
-```
 
+◆想定以上のパラメータを指定しても、$argsパラメータがかっくのうしてくれる
+function varparam($a, $b){
+    $a
+    $b
+    $args
+    }
+varparam "Hi" "Hello" "Power" "Shell"
+
+◆関数の引数には、型指定をしてエラーを発生させることができる。
+function addint([int]$a, [int]$b){ $a + $b }
+addint 2 3b
+→エラーが発生する。
+
+◆引数にデフォルト値を設定しておくことも可能
+function test($a = 10, $b){ $a}
+test 52
+```
 
 ## 良く使うコマンド
 ### Get-Help
