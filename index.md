@@ -213,6 +213,26 @@ Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
     288      24     5816       5984              4484   0 AppleMobileDeviceService
 
 ```
+## モジュール化
+モジュール化する際には以下の通りに記述する。
+
+```
+◆コマンドライン引数を受け付ける場合
+PS C:\Users> function paramshow{ $args }
+PS C:\Users> paramshow "Hi" "PowerShell"
+Hi
+PowerShell
+
+PS C:\Users> function paramadd { $args[0] + $args[1] }
+PS C:\Users> paramadd 2 3
+5
+
+◆変数を受け付ける場合
+function test ($num1, $num2){ $num1 * $num2 }
+test 2 4
+test -num2 4 -num1 6
+```
+
 
 ## 良く使うコマンド
 ### Get-Help
