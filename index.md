@@ -215,7 +215,8 @@ Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
 ```
 ## モジュール化
 モジュール化する際には以下の通りに記述する。
-
+* 変数のスコープは、府関数内に限定される。
+* ls function: と打つことで関数一覧が出せる（但し、そのセッションのみ）
 ```
 ◆コマンドライン引数を受け付ける場合
 PS C:\Users> function paramshow{ $args }
@@ -248,6 +249,16 @@ addint 2 3b
 ◆引数にデフォルト値を設定しておくことも可能
 function test($a = 10, $b){ $a}
 test 52
+
+◆SWITCHオプションを使うと、引数を付けた時だけ別のプログラムを動かすことが可能
+function switchable($a,$b,[switch]$flip){
+    Write-Output($a+$b)
+        if($flip){ Write-Output($a-$b) }
+}
+
+PS C:\> switchable 3 1 -flip
+4
+2
 ```
 
 ## 良く使うコマンド
